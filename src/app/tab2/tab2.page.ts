@@ -1,4 +1,11 @@
 import { Component } from '@angular/core';
+import { Geolocation } from '@capacitor/geolocation';
+
+// for GPS
+/*
+npm install @capacitor/geolocation
+npx cap sync 
+*/
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +14,15 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
+  latitude: any;
+  longitude: any;
+
   constructor() {}
 
+  async handleLocateMe() {
+    const coordinates = await Geolocation.getCurrentPosition();
+
+    this.latitude = coordinates.coords.latitude;
+    this.longitude = coordinates.coords.longitude;
+  }
 }
